@@ -11,14 +11,20 @@ import Data.List (sort)
 import System.Directory
 import Text.JSON.Generic 
 
-data ScoreType = Code String String | Score String Integer 
+data ScoreType = Code String String | Score Integer String
                deriving (Show, Data, Typeable)
 
 scoreTypeShamlet (Code code desc) = [shamlet| <p>#{code} #{desc}: #{show $ length code}. |]
-scoreTypeShamlet (Score desc score) = [shamlet| <p>#{desc}: #{score}. |]
+scoreTypeShamlet (Score score desc) = [shamlet| <p>#{desc}: #{score}. |]
 
-score (Code code _) = show $ length code 
-score (Score _ score) = show score
+scoreI :: ScoreType -> Integer
+scoreI (Code code _) = toInteger $ length code 
+scoreI (Score score _) = score
+
+score = show . scoreI 
+
+total (Codes2 _ a b c d e f g h i j k l m) =
+  sum $ map scoreI [a,b,c,d,e,f,g,h,i,j,k,l,m]
 
 data Codes2 = Codes2
     { name :: String
@@ -45,19 +51,20 @@ clojure =
   Codes2 {
     name = "Clojure"
     , nullField = Code "(get l <lookup-keyword> <default-if-missing>)" "In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use 'get' which checks for nil by default." 
-    , nullList = Score "In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check." (-30)
+    , nullList = Score (-30) "In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check." 
     , wrongVaribleType = Code "(instance? c x)"
                             "In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to 'instance?' will give a runtime error." 
     , missingListElem = Code "(get i <list> <default-value>)" "Clojure's 'get' also gets values out of lists by index."
     , wrongCast  = Code "(try (<T> o) (catch Exception e <alternative>))" "Requires a try/catch block around the primitive cast function."
-    , wrongTypeToMethod    = Code "" ""
-    , missingMethodOrField  = Code "" ""
-    , missingEnum   = Code "" ""
-    , variableMutation   = Code "" ""
-    , deadLocks  = Code "" ""
-    , memoryDeallocation  = Code "" ""
-    , recursionStackOverflow  = Code "" ""
-    , consistentCodeExecution = Code "" ""
+    , wrongTypeToMethod = Score 0 "In Clojure, parameters can be annotated with a type, which is checked at runtime: "
+    , missingMethodOrField  = Score (-30) "Clojure, the language checks for this before runtime." 
+    , missingEnum  = Score 30 "No way to idiomatically check."
+    , variableMutation  = Score (-30) "In Clojure, anything you would pass is immutable, so no check and enforced by the language before runtime." 
+    , deadLocks  = Score (-30) "The STM and agent model built into the language cannot deadlock, and data is immutable or changes are queued."
+    , memoryDeallocation  = Score (-30) "Handled by garbage collector."
+    , recursionStackOverflow  = Code "(loop [<params>] (recur <args>))"
+                                "Clojure provides a syntax for tail-call opimization, called loop/recur." 
+    , consistentCodeExecution = Score 30 "Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent."
  }   
 
 languages = [clojure]
@@ -69,6 +76,6 @@ main :: IO ()
 main =
   let file = tester
       in do writeFile "index2.html" file
-            putStrLn file
-            putStrLn $ show clojure
+            putStrLn $ show $ total clojure
+            
 

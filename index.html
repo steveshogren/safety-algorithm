@@ -104,6 +104,10 @@
                 Ensure Code Executes When Passed To a Function
               $forall lang <- languages
                 <td>#{score $ consistentCodeExecution lang}
+            <tr>
+              <td>Totals
+              $forall lang <- languages
+                <td>#{show $ total lang}
     <h3> Null Field Access
     #{scoreTypeShamlet $ nullField clojure}
     <h3> Null List Access
