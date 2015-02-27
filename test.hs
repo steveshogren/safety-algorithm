@@ -10,6 +10,7 @@ import Data.Char (toLower)
 import Data.List (sort)
 import System.Directory
 import Text.JSON.Generic 
+import Text.Regex
 
 data ScoreType = Code String String | Score Integer String
                deriving (Show, Data, Typeable)
@@ -17,14 +18,19 @@ data ScoreType = Code String String | Score Integer String
 scoreTypeShamlet (Code code desc) = [shamlet| <p>#{code} #{desc}: #{show $ length code}. |]
 scoreTypeShamlet (Score score desc) = [shamlet| <p>#{desc}: #{score}. |]
 
+cleanCode c =
+  let f = subRegex (mkRegex "<\\w>") c ""
+      in subRegex (mkRegex "\\s") f ""
+
 scoreI :: ScoreType -> Integer
-scoreI (Code code _) = toInteger $ length code 
+scoreI (Code code _) = (toInteger . length . cleanCode) code 
 scoreI (Score score _) = score
 
 score = show . scoreI 
 
 total (Codes2 _ a b c d e f g h i j k l m) =
   sum $ map scoreI [a,b,c,d,e,f,g,h,i,j,k,l,m]
+
 
 data Codes2 = Codes2
     { name :: String
