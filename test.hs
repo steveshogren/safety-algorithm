@@ -12,25 +12,26 @@ import System.Directory
 import Text.JSON.Generic 
 import Text.Regex
 
-data ScoreType = Code String String | Score Integer String
+data ScoreType = Code {rawCode :: String, desc :: String, enforced :: Bool}
+               | Score {humanScore::Integer, desc:: String}
                deriving (Show, Data, Typeable)
 
-scoreTypeShamlet (Code code desc) = [shamlet| <p>#{code} #{desc}: #{show $ length code}. |]
-scoreTypeShamlet (Score score desc) = [shamlet| <p>#{desc}: #{score}. |]
-
 cleanCode c =
-  let f = subRegex (mkRegex "<\\w>") c ""
+  let f = subRegex (mkRegex "<[a-zA-Z]+>") c ""
       in subRegex (mkRegex "\\s") f ""
 
 scoreI :: ScoreType -> Integer
-scoreI (Code code _) = (toInteger . length . cleanCode) code 
-scoreI (Score score _) = score
+scoreI Code {rawCode=c, enforced=enforced} =
+  ((if enforced then (30 -) else id) . toInteger . length . cleanCode) c
+scoreI Score {humanScore=s} = s
 
 score = show . scoreI 
 
+scoreTypeShamlet c@(Code {}) = [shamlet| <p>#{rawCode c} #{desc c}: #{score c}. |]
+scoreTypeShamlet st@(Score {}) = [shamlet| <p>#{desc st}: #{score st}. |]
+
 total (Codes2 _ a b c d e f g h i j k l m) =
   sum $ map scoreI [a,b,c,d,e,f,g,h,i,j,k,l,m]
-
 
 data Codes2 = Codes2
     { name :: String
@@ -56,12 +57,13 @@ contents = do
 clojure = 
   Codes2 {
     name = "Clojure"
-    , nullField = Code "(get l <lookup-keyword> <default-if-missing>)" "In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use 'get' which checks for nil by default." 
+    , nullField = Code "(get l <lookup-keyword> <default-if-missing>)" "In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use 'get' which checks for nil by default." False
     , nullList = Score (-30) "In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check." 
     , wrongVaribleType = Code "(instance? c x)"
-                            "In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to 'instance?' will give a runtime error." 
-    , missingListElem = Code "(get i <list> <default-value>)" "Clojure's 'get' also gets values out of lists by index."
-    , wrongCast  = Code "(try (<T> o) (catch Exception e <alternative>))" "Requires a try/catch block around the primitive cast function."
+                            "In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to 'instance?' will give a runtime error."
+                            False
+    , missingListElem = Code "(get i <list> <default-value>)" "Clojure's 'get' also gets values out of lists by index." False
+    , wrongCast  = Code "(try (<T> o) (catch Exception e <alternative>))" "Requires a try/catch block around the primitive cast function." False
     , wrongTypeToMethod = Score 0 "In Clojure, parameters can be annotated with a type, which is checked at runtime: "
     , missingMethodOrField  = Score (-30) "Clojure, the language checks for this before runtime." 
     , missingEnum  = Score 30 "No way to idiomatically check."
@@ -70,6 +72,7 @@ clojure =
     , memoryDeallocation  = Score (-30) "Handled by garbage collector."
     , recursionStackOverflow  = Code "(loop [<params>] (recur <args>))"
                                 "Clojure provides a syntax for tail-call opimization, called loop/recur." 
+                                False
     , consistentCodeExecution = Score 30 "Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent."
  }   
 
@@ -83,5 +86,6 @@ main =
   let file = tester
       in do writeFile "index2.html" file
             putStrLn $ show $ total clojure
+            (putStrLn . cleanCode . rawCode . wrongCast) clojure 
             
 
