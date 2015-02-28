@@ -17,7 +17,7 @@ data ScoreType = Code {rawCode :: String, desc :: String, enforced :: Bool}
                deriving (Show, Data, Typeable)
 
 cleanCode c =
-  let f = subRegex (mkRegex "<[a-zA-Z]+>") c ""
+  let f = subRegex (mkRegex "<[a-zA-Z-]+>") c ""
       in subRegex (mkRegex "\\s") f ""
 
 scoreI :: ScoreType -> Integer
@@ -86,6 +86,6 @@ main =
   let file = tester
       in do writeFile "index2.html" file
             putStrLn $ show $ total clojure
-            (putStrLn . cleanCode . rawCode . wrongCast) clojure 
+            (putStrLn . cleanCode . rawCode . missingListElem) clojure 
             
 
