@@ -28,60 +28,99 @@
 </nav>
 <div class="container"><div class="starter-template"><h1>Rankings</h1>
 <p class="lead"><table><tr><th>Safety Check</th>
+<th>C#</th>
+<th>F#</th>
 <th>Clojure</th>
+<th>JavaScript</th>
 </tr>
 <tr><td>Null Reference Method/Field Invocation</td>
+<td>19</td>
+<td>-26</td>
 <td>6</td>
+<td>20</td>
 </tr>
 <tr><td>Null List Iteration</td>
+<td>19</td>
 <td>-30</td>
+<td>-30</td>
+<td>20</td>
 </tr>
 <tr><td>Putting wrong type into variable</td>
+<td>-30</td>
+<td>-30</td>
 <td>13</td>
+<td>30</td>
 </tr>
 <tr><td>Missing List Element </td>
+<td>23</td>
+<td>21</td>
 <td>6</td>
+<td>22</td>
 </tr>
 <tr><td>Incorrect Type Casting</td>
+<td>29</td>
+<td>-7</td>
 <td>25</td>
+<td>30</td>
 </tr>
 <tr><td>Passing Wrong Type to Method</td>
+<td>-30</td>
+<td>-30</td>
 <td>0</td>
+<td>30</td>
 </tr>
 <tr><td>Calling Missing Method/Field/Function/Variable/Constant</td>
 <td>-30</td>
+<td>-30</td>
+<td>-30</td>
+<td>20</td>
 </tr>
 <tr><td>Missing Enum Dispatch Implementation</td>
 <td>30</td>
+<td>0</td>
+<td>30</td>
+<td>30</td>
 </tr>
 <tr><td>Unexpected Variable Mutation </td>
+<td>40</td>
 <td>-30</td>
+<td>-30</td>
+<td>0</td>
 </tr>
 <tr><td>Deadlock prevention</td>
+<td>30</td>
+<td>30</td>
 <td>-30</td>
+<td>0</td>
 </tr>
 <tr><td>Memory Deallocation</td>
 <td>-30</td>
+<td>-30</td>
+<td>-30</td>
+<td>-30</td>
 </tr>
 <tr><td>Stack Overflow Exceptions Caused by Recursion</td>
+<td>30</td>
+<td>-30</td>
 <td>15</td>
-</tr>
-<tr><td>Ensure Code Executes When Passed To a Function</td>
 <td>30</td>
 </tr>
+<tr><td>Ensure Code Executes When Passed To a Function</td>
+<td>-30</td>
+<td>-30</td>
+<td>30</td>
+<td>-30</td>
+</tr>
 <tr><td>Totals</td>
+<td>70</td>
+<td>-222</td>
 <td>-25</td>
+<td>172</td>
 </tr>
 </table>
 </p>
 </div>
 </div>
-<h3> Null Field Access</h3>
-<p>(get l &lt;lookup-keyword&gt; &lt;default-if-missing&gt;) In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use &#39;get&#39; which checks for nil by default.: 6. </p>
-
-<h3> Null List Access</h3>
-<p>In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check.: -30. </p>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
