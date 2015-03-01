@@ -33,8 +33,7 @@ scoreTypeShamlet lang c@(Code {}) =
       cmt = pack . comment $ lang
       cleaned = (pack . cleanCode . rawCode) c
   in [shamlet|
-<p>Score: #{score c} 
-<p>#{desc c} 
+<p>#{desc c} Score: #{score c} 
 \ 
 ``` #{markupName lang}
 \    #{preEscapedText cmt}1234567890123456789012345678901234567890
@@ -43,7 +42,7 @@ scoreTypeShamlet lang c@(Code {}) =
 \    #{preEscapedText raw}
 ```
 \ |]
-scoreTypeShamlet _ st@(Score {}) = [shamlet| <p>#{desc st}: #{score st}. |]
+scoreTypeShamlet _ st@(Score {}) = [shamlet| <p>#{desc st} #{score st} |]
 
 data Language = Language
     { name :: String
