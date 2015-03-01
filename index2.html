@@ -1,32 +1,3 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
-<title>Starter Template for Bootstrap</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/starter-template.css" rel="stylesheet">
-</head>
-<body><nav class="navbar navbar-inverse navbar-fixed-top"><div class="container"><div class="navbar-header"><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<a class="navbar-brand" href="#">Project name</a>
-</div>
-<div class="collapse navbar-collapse" id="navbar"><ul class="nav navbar-nav"><li class="active"><a href="#">Home</a>
-</li>
-<li><a href="#about">About</a>
-</li>
-<li><a href="#contact">Contact</a>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-<div class="container"><div class="starter-template"><h1>Rankings</h1>
 <p class="lead"><table><tr><th>Safety Check</th>
 <th>C#</th>
 <th>F#</th>
@@ -118,10 +89,296 @@
 <td>172</td>
 </tr>
 </table>
+<h2>C#</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>Score: 19 </p>
+<p> </p>
+ 
+``` csharp
+    //123456789012345678901234567890
+    //if(l!=null){}else{}
+
+    if (l != null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Null List Iteration</h3>
+<p>Score: 19 </p>
+<p> </p>
+ 
+``` csharp
+    //123456789012345678901234567890
+    //if(l!=null){}else{}
+
+    if (l != null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Putting wrong type into variable</h3>
+<p>: -30. </p>
+
+<h3> Missing List Element </h3>
+<p>Score: 23 </p>
+<p> </p>
+ 
+``` csharp
+    //123456789012345678901234567890
+    //if(l.Count()>i){}else{}
+
+    if (l.Count() > i) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Incorrect Type Casting</h3>
+<p>Score: 29 </p>
+<p> </p>
+ 
+``` csharp
+    //123456789012345678901234567890
+    //varm=oasT;if(m!=null){}else{}
+
+    var m = o as T; if (m != null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Passing Wrong Type to Method</h3>
+<p>: -30. </p>
+
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>: -30. </p>
+
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>No way to idiomatically check.: 30. </p>
+
+<h3> Unexpected Variable Mutation </h3>
+<p>Score: 40 </p>
+<p> </p>
+ 
+``` csharp
+    //123456789012345678901234567890
+    //publicclassT{readonlyn;publicT(i){n=i;}}
+
+    public class T {readonly <!type!> n; public T(<!type!> i) {n = i;}}
+```
+ 
+<h3> Deadlock prevention</h3>
+<p>: 30. </p>
+
+<h3> Memory Deallocation</h3>
+<p>Handled by garbage collector.: -30. </p>
+
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>: 30. </p>
+
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>: -30. </p>
+<h2>F#</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>Score: -26 </p>
+<p> </p>
+ 
+``` fsharp
+    //123456789012345678901234567890
+    //<*>l
+
+    <!consequent!> <*> l
+```
+ 
+<h3> Null List Iteration</h3>
+<p>: -30. </p>
+
+<h3> Putting wrong type into variable</h3>
+<p>: -30. </p>
+
+<h3> Missing List Element </h3>
+<p>Score: 21 </p>
+<p> </p>
+ 
+``` fsharp
+    //123456789012345678901234567890
+    //ifl.Count()>ithenelse
+
+    if l.Count() > i then <!consequent!> else <!alternative!>
+```
+ 
+<h3> Incorrect Type Casting</h3>
+<p>Score: -7 </p>
+<p> </p>
+ 
+``` fsharp
+    //123456789012345678901234567890
+    //matchowith|:?Tasm->|_->
+
+    match o with | :? T as m -> <!consequent!> | _ -> <!alternative!>
+```
+ 
+<h3> Passing Wrong Type to Method</h3>
+<p>: -30. </p>
+
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>: -30. </p>
+
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>: 0. </p>
+
+<h3> Unexpected Variable Mutation </h3>
+<p>: -30. </p>
+
+<h3> Deadlock prevention</h3>
+<p>: 30. </p>
+
+<h3> Memory Deallocation</h3>
+<p>: -30. </p>
+
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>: -30. </p>
+
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>: -30. </p>
+<h2>Clojure</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>Score: 6 </p>
+<p>In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use &#39;get&#39; which checks for nil by default. </p>
+ 
+``` clojure
+    ;;123456789012345678901234567890
+    ;;(getl)
+
+    (get l <!lookup-keyword!> <!default-if-missing!>)
+```
+ 
+<h3> Null List Iteration</h3>
+<p>In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check.: -30. </p>
+
+<h3> Putting wrong type into variable</h3>
+<p>Score: 13 </p>
+<p>In Clojure, the closest thing to a variable is a let bound function or an atom, and neither can be annotated by default. A wrapping call to &#39;instance?&#39; will give a runtime error. </p>
+ 
+``` clojure
+    ;;123456789012345678901234567890
+    ;;(instance?cx)
+
+    (instance? c x)
+```
+ 
+<h3> Missing List Element </h3>
+<p>Score: 6 </p>
+<p>Clojure&#39;s &#39;get&#39; also gets values out of lists by index. </p>
+ 
+``` clojure
+    ;;123456789012345678901234567890
+    ;;(geti)
+
+    (get i <!list!> <!default-value!>)
+```
+ 
+<h3> Incorrect Type Casting</h3>
+<p>Score: 25 </p>
+<p>Requires a try/catch block around the primitive cast function. </p>
+ 
+``` clojure
+    ;;123456789012345678901234567890
+    ;;(try(o)(catchExceptione))
+
+    (try (<!T!> o) (catch Exception e <!alternative!>))
+```
+ 
+<h3> Passing Wrong Type to Method</h3>
+<p>In Clojure, parameters can be annotated with a type, which is checked at runtime: : 0. </p>
+
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>Clojure, the language checks for this before runtime.: -30. </p>
+
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>No way to idiomatically check.: 30. </p>
+
+<h3> Unexpected Variable Mutation </h3>
+<p>In Clojure, anything you would pass is immutable, so no check and enforced by the language before runtime.: -30. </p>
+
+<h3> Deadlock prevention</h3>
+<p>The STM and agent model built into the language cannot deadlock, and data is immutable or changes are queued.: -30. </p>
+
+<h3> Memory Deallocation</h3>
+<p>Handled by garbage collector.: -30. </p>
+
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>Score: 15 </p>
+<p>Clojure provides a syntax for tail-call opimization, called loop/recur. </p>
+ 
+``` clojure
+    ;;123456789012345678901234567890
+    ;;(loop[](recur))
+
+    (loop [<!params!>] (recur <!args!>))
+```
+ 
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>Clojure macros can prevent parameters from executing at all by rewriting the call, and it is impossible to prevent.: 30. </p>
+<h2>JavaScript</h2>
+<h3> Null Reference Method/Field Invocation</h3>
+<p>Score: 20 </p>
+<p> </p>
+ 
+``` javascript
+    //123456789012345678901234567890
+    //if(l!==null){}else{}
+
+    if (l !== null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Null List Iteration</h3>
+<p>Score: 20 </p>
+<p> </p>
+ 
+``` javascript
+    //123456789012345678901234567890
+    //if(l!==null){}else{}
+
+    if (l !== null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Putting wrong type into variable</h3>
+<p>: 30. </p>
+
+<h3> Missing List Element </h3>
+<p>Score: 22 </p>
+<p> </p>
+ 
+``` javascript
+    //123456789012345678901234567890
+    //if(l.length>i){}else{}
+
+    if (l.length > i) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Incorrect Type Casting</h3>
+<p>: 30. </p>
+
+<h3> Passing Wrong Type to Method</h3>
+<p>: 30. </p>
+
+<h3> Calling Missing Method/Field/Function/Variable/Constant</h3>
+<p>Score: 20 </p>
+<p> </p>
+ 
+``` javascript
+    //123456789012345678901234567890
+    //if(l!==null){}else{}
+
+    if (l !== null) {<!consequent!>} else {<!alternative!>}
+```
+ 
+<h3> Missing Enum Dispatch Implementation</h3>
+<p>: 30. </p>
+
+<h3> Unexpected Variable Mutation </h3>
+<p>: 0. </p>
+
+<h3> Deadlock prevention</h3>
+<p>: 0. </p>
+
+<h3> Memory Deallocation</h3>
+<p>: -30. </p>
+
+<h3> Stack Overflow Exceptions Caused by Recursion</h3>
+<p>: 30. </p>
+
+<h3> Ensure Code Executes When Passed To a Function</h3>
+<p>: -30. </p>
 </p>
-</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html>

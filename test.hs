@@ -10,11 +10,13 @@ import Data.Char (toLower)
 import Data.List (sort)
 import System.Directory
 import Text.JSON.Generic 
-import Languages (ScoreType(Code,Score), Language(..), score, total)
+import Languages (ScoreType(Code,Score), Language(..), score, total, scoreTypeShamlet)
 
 javascript = 
   Language {
     name = "JavaScript"
+    , markupName = "javascript"
+    , comment = "//"
     , nullField = Code "if (l !== null) {<!consequent!>} else {<!alternative!>}" "" False
     , nullList = Code "if (l !== null) {<!consequent!>} else {<!alternative!>}" "" False
     , wrongVaribleType = Score 30 ""
@@ -33,6 +35,8 @@ javascript =
 fsharp = 
   Language {
     name = "F#"
+    , markupName = "fsharp"
+    , comment = "//"
     , nullField = Code "<!consequent!> <*> l" "" True
     , nullList = Score (-30) ""
     , wrongVaribleType = Score (-30) ""
@@ -51,6 +55,8 @@ fsharp =
 csharp = 
   Language {
     name = "C#"
+    , markupName = "csharp"
+    , comment = "//"
     , nullField = Code "if (l != null) {<!consequent!>} else {<!alternative!>}" "" False
     , nullList = Code "if (l != null) {<!consequent!>} else {<!alternative!>}"  "" False 
     , wrongVaribleType = Score (-30) ""
@@ -69,6 +75,8 @@ csharp =
 clojure = 
   Language {
     name = "Clojure"
+    , markupName = "clojure"
+    , comment = ";;"
     , nullField = Code "(get l <!lookup-keyword!> <!default-if-missing!>)" "In Clojure, it is idiomatic to put data or functions inside primitive data structures like a hashmap. Retrieval and execution would likely use 'get' which checks for nil by default." False
     , nullList = Score (-30) "In Clojure, the default iteration functions: map, reduce, filter all check and return an empty list if nil, so no need for a check." 
     , wrongVaribleType = Code "(instance? c x)"

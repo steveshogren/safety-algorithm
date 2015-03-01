@@ -1,115 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+<p class="lead">
+  <table>
+    <tr>
+      <th>
+        Safety Check
+      $forall lang <- languages
+        <th>#{name lang}
+    <tr>
+      <td>
+        Null Reference Method/Field Invocation
+      $forall lang <- languages
+        <td>#{score $ nullField lang}
+    <tr>
+      <td>
+        Null List Iteration
+      $forall lang <- languages
+        <td>#{score $ nullList lang}
+    <tr>
+      <td>
+        Putting wrong type into variable
+      $forall lang <- languages
+        <td>#{score $ wrongVaribleType lang}
+    <tr>
+      <td>
+        Missing List Element 
+      $forall lang <- languages
+        <td>#{score $ missingListElem lang}
+    <tr>
+      <td>
+        Incorrect Type Casting
+      $forall lang <- languages
+        <td>#{score $ wrongCast lang}
+    <tr>
+      <td>
+        Passing Wrong Type to Method
+      $forall lang <- languages
+        <td>#{score $ wrongTypeToMethod lang}
+    <tr>
+      <td>
+        Calling Missing Method/Field/Function/Variable/Constant
+      $forall lang <- languages
+        <td>#{score $ missingMethodOrField lang}
+    <tr>
+      <td>
+        Missing Enum Dispatch Implementation
+      $forall lang <- languages
+        <td>#{score $ missingEnum lang}
+    <tr>
+      <td>
+        Unexpected Variable Mutation 
+      $forall lang <- languages
+        <td>#{score $ variableMutation lang}
+    <tr>
+      <td>
+        Deadlock prevention
+      $forall lang <- languages
+        <td>#{score $ deadLocks lang}
+    <tr>
+      <td>
+        Memory Deallocation
+      $forall lang <- languages
+        <td>#{score $ memoryDeallocation lang}
+    <tr>
+      <td>
+        Stack Overflow Exceptions Caused by Recursion
+      $forall lang <- languages
+        <td>#{score $ recursionStackOverflow lang}
+    <tr>
+      <td>
+        Ensure Code Executes When Passed To a Function
+      $forall lang <- languages
+        <td>#{score $ consistentCodeExecution lang}
+    <tr>
+      <td>Totals
+      $forall lang <- languages
+        <td>#{show $ total lang}
+  $forall lang <- languages
+    <h2>#{name lang}
+    <h3> Null Reference Method/Field Invocation
+    #{((scoreTypeShamlet lang) . nullField) lang}
+    <h3> Null List Iteration
+    #{((scoreTypeShamlet lang) . nullList) lang }
+    <h3> Putting wrong type into variable
+    #{((scoreTypeShamlet lang) . wrongVaribleType) lang }
+    <h3> Missing List Element 
+    #{((scoreTypeShamlet lang) . missingListElem) lang}
+    <h3> Incorrect Type Casting
+    #{((scoreTypeShamlet lang) . wrongCast) lang}
+    <h3> Passing Wrong Type to Method
+    #{((scoreTypeShamlet lang) . wrongTypeToMethod) lang}
+    <h3> Calling Missing Method/Field/Function/Variable/Constant
+    #{((scoreTypeShamlet lang) . missingMethodOrField) lang}
+    <h3> Missing Enum Dispatch Implementation
+    #{((scoreTypeShamlet lang) . missingEnum) lang}
+    <h3> Unexpected Variable Mutation 
+    #{((scoreTypeShamlet lang) . variableMutation) lang}
+    <h3> Deadlock prevention
+    #{((scoreTypeShamlet lang) . deadLocks) lang}
+    <h3> Memory Deallocation
+    #{((scoreTypeShamlet lang) . memoryDeallocation) lang }
+    <h3> Stack Overflow Exceptions Caused by Recursion
+    #{((scoreTypeShamlet lang) . recursionStackOverflow) lang }
+    <h3> Ensure Code Executes When Passed To a Function
+    #{((scoreTypeShamlet lang) . consistentCodeExecution) lang }
 
-    <title>Starter Template for Bootstrap
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/starter-template.css" rel="stylesheet">
-  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation
-            <span class="icon-bar">
-            <span class="icon-bar">
-            <span class="icon-bar">
-          <a class="navbar-brand" href="#">Project name
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active">
-              <a href="#">Home
-            <li>
-              <a href="#about">About
-            <li>
-              <a href="#contact">Contact
-    <div class="container">
-      <div class="starter-template">
-        <h1>Rankings
-        <p class="lead">
-          <table>
-            <tr>
-              <th>
-                Safety Check
-              $forall lang <- languages
-                <th>#{name lang}
-            <tr>
-              <td>
-                Null Reference Method/Field Invocation
-              $forall lang <- languages
-                <td>#{score $ nullField lang}
-            <tr>
-              <td>
-                Null List Iteration
-              $forall lang <- languages
-                <td>#{score $ nullList lang}
-            <tr>
-              <td>
-                Putting wrong type into variable
-              $forall lang <- languages
-                <td>#{score $ wrongVaribleType lang}
-            <tr>
-              <td>
-                Missing List Element 
-              $forall lang <- languages
-                <td>#{score $ missingListElem lang}
-            <tr>
-              <td>
-                Incorrect Type Casting
-              $forall lang <- languages
-                <td>#{score $ wrongCast lang}
-            <tr>
-              <td>
-                Passing Wrong Type to Method
-              $forall lang <- languages
-                <td>#{score $ wrongTypeToMethod lang}
-            <tr>
-              <td>
-                Calling Missing Method/Field/Function/Variable/Constant
-              $forall lang <- languages
-                <td>#{score $ missingMethodOrField lang}
-            <tr>
-              <td>
-                Missing Enum Dispatch Implementation
-              $forall lang <- languages
-                <td>#{score $ missingEnum lang}
-            <tr>
-              <td>
-                Unexpected Variable Mutation 
-              $forall lang <- languages
-                <td>#{score $ variableMutation lang}
-            <tr>
-              <td>
-                Deadlock prevention
-              $forall lang <- languages
-                <td>#{score $ deadLocks lang}
-            <tr>
-              <td>
-                Memory Deallocation
-              $forall lang <- languages
-                <td>#{score $ memoryDeallocation lang}
-            <tr>
-              <td>
-                Stack Overflow Exceptions Caused by Recursion
-              $forall lang <- languages
-                <td>#{score $ recursionStackOverflow lang}
-            <tr>
-              <td>
-                Ensure Code Executes When Passed To a Function
-              $forall lang <- languages
-                <td>#{score $ consistentCodeExecution lang}
-            <tr>
-              <td>Totals
-              $forall lang <- languages
-                <td>#{show $ total lang}
-        
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
-    <script src="js/bootstrap.min.js">
   
 
